@@ -118,7 +118,90 @@ Normalize our dataset.
 8. Finally, call the functions confusion_matrix(), and the classification_report() in order to evaluate the performance of our classifier.
 
 ## PROGRAM 
+~~~
+### Developed by : GURU PRASAD.B
+### Reg.No : 212221230032
+Problem to implement a Multilayer Perceptron for Multi class-classification.
 
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+data=pd.read_csv("IRIS.csv")
+
+data.head()
+
+name=["sepal_length","sepal_width","petal_length","petal_width"]
+
+x=data.iloc[:,0:4]
+
+y=data.select_dtypes(include=[object])
+
+x.head()
+
+y.head()
+
+from sklearn import preprocessing
+
+label_encoder=preprocessing.LabelEncoder()
+
+data['species']=label_encoder.fit_transform(data['species'])
+
+data['species'].unique()
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+
+scaler.fit(x_train)
+
+x_train=scaler.transform(x_train)
+
+x_test=scaler.transform(x_test)
+
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+
+mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
+
+mlp.fit(x_train,y_train.values.ravel())
+
+predictions=mlp.predict(x_test)
+
+print(predictions)
+
+print(confusion_matrix(y_test,predictions))
+
+print(classification_report(y_test,predictions))
+~~~
 ## OUTPUT 
 
+## data.head():
+
+![out1 (1)](https://user-images.githubusercontent.com/95342910/200998227-ba1396bb-5b48-41a6-ba14-6100088cd731.png)
+
+## x.head():
+
+ ![out2](https://user-images.githubusercontent.com/95342910/200998262-4205e870-7dc5-464e-a729-5f0c4368327b.png)
+
+## y.head():
+
+![out3](https://user-images.githubusercontent.com/95342910/200998279-8c1fb721-f035-4641-a60d-9152b9c7afa8.png)
+
+## Printing the predictions:
+
+![out4](https://user-images.githubusercontent.com/95342910/200998292-18cbfc3e-542a-494e-82eb-417aa015ce9f.png)
+
+## Confusion matrix:
+
+![out5](https://user-images.githubusercontent.com/95342910/200998359-caa91816-9485-4e75-8948-35cba8586578.png)
+
+## Classification report():
+
+![out6](https://user-images.githubusercontent.com/95342910/200998368-1bdd294d-9dfb-4c70-aeb1-9ae224a05257.png)
+
+
 ## RESULT
+Thus, a program to implement a Multilayer Perceptron for Multi class classification is developed and successfully executted.
